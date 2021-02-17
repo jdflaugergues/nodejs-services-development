@@ -3,7 +3,16 @@
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 
+const dev = process.env.NODE_ENV !== 'production'
+
+const fastifyStatic = dev && require('fastify-static')
+
 module.exports = async function (fastify, opts) {
+  if (dev) {
+    fastify.register(fastifyStatic, {
+      root: path.join(__dirname, 'public')
+    })
+  }
 
   // This loads all plugins defined in plugins those should be support plugins that are reused through your application
   fastify.register(AutoLoad, {
