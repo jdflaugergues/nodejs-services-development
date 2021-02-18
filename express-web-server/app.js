@@ -6,6 +6,7 @@ const logger = require('morgan')
 
 const indexRouter = require('./routes/index')
 const helloRouter = require('./routes/hello')
+const articlesRouter = require('./routes/articles')
 
 const app = express()
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use('/', indexRouter)
 app.use('/hello', helloRouter)
+app.use('/articles', articlesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
