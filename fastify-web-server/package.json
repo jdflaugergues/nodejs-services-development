@@ -20,6 +20,7 @@
     "fastify-cli": "^2.7.0",
     "fastify-plugin": "^3.0.0",
     "handlebars": "^4.7.7",
+    "hn-latest-stream": "^1.0.2",
     "point-of-view": "^4.13.0",
     "queue-microtask": "^1.1.4"
   },
