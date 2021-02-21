@@ -2,11 +2,10 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
+const sensible = require('fastify-sensible')
 
 module.exports = async function (fastify, opts) {
-  // Place here your custom code!
-
-  // Do not touch the following lines
+  fastify.register(sensible)
 
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
