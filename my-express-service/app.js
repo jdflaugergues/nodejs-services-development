@@ -13,6 +13,16 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
+app.use((req, res, next) => {
+  if (req.socket.remoteAddress === '127.0.0.1') {
+    const err = new Error('Forbidden')
+    err.status = 403
+    next(err)
+    return
+  }
+  next()
+});
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -28,7 +38,11 @@ app.use((req, res, next) => {
 })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
   res.status(err.status || 500);
   res.send({
     type: 'error',
